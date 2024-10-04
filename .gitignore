@@ -1,0 +1,19 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Data
+*.csv
+*.xlsx
+*.pkl
+
+# Models
+*.h5
+*.pth
+
+# Logs
+*.log
+
+# Virtual environment
+venv/
