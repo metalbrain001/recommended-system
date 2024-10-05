@@ -2,9 +2,7 @@
 exclude = 
     migrations,
     __pycache__,
-    app/manage.py,
-    app/settings.py,
+    manage.py,
+    settings.py,
     .venv,
     venv,
-max-line-length = 82
-max-line-length = 79
