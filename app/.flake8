@@ -6,3 +6,5 @@ exclude =
     settings.py,
     .venv,
     venv,
+    .git,
+max-line-length = 119
