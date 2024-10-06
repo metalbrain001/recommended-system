@@ -4,10 +4,9 @@ services:
       context: .
       args:
         - DEV=true
-      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
       - .:/app:/app
     command: >
-      sh -c "python app/manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py runserver 0.0.0.0:8000"
