@@ -20,3 +20,6 @@ venv/
 
 # DS store
 .DS_Store
+
+# Environment variables
+.env
