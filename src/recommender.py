@@ -10,34 +10,34 @@ class RecommenderSystem:
     """Class for content and collaborative
     filtering recommendation."""
 
-    def __init__(self, movies, ratings):
+    def __init__(self, MOVIES, RATINGS):
         """
         Initialize with movies and ratings DataFrames.
         """
-        self.movies = movies
-        self.ratings = ratings
+        self.movies = MOVIES
+        self.ratings = RATINGS
 
-    def content_based_filtering(self, movie_title, top_n=10):
+    def content_based_filtering(self, MOVIE_TITLE, TOP_N=10):
         """
         Content-based filtering
         recommendation based on movie genres.
         Recommends movies similar to the given movie title.
         """
         # Use TF-IDF Vectorizer to calculate the similarity between genres
-        tfidf = TfidfVectorizer(stop_words="english")
-        tfidf_matrix = tfidf.fit_transform(self.movies["genres"])
+        TFIDF = TfidfVectorizer(stop_words="english")
+        TFIDF_MATRIX = TFIDF.fit_transform(self.movies["genres"])
         # Compute cosine similarity
-        cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
+        COSINE_SIM = cosine_similarity(TFIDF_MATRIX, TFIDF_MATRIX)
         # Find the index of the movie that matches the title
-        idx = self.movies[self.movies["title"] == movie_title].index[0]
+        IDX = self.movies[self.movies["title"] == MOVIE_TITLE].index[0]
         # Get similarity scores for all movies
-        sim_scores = list(enumerate(cosine_sim[idx]))
+        SIM_SCORES = list(enumerate(COSINE_SIM[IDX]))
         # Sort movies by similarity scores
-        sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+        SIM_SCORES = sorted(SIM_SCORES, key=lambda x: x[1], reverse=True)
         # Get the indices of the top-n most similar movies
-        movie_indices = [i[0] for i in sim_scores[1 : top_n + 1]]
+        MOVIE_INDICIES = [i[0] for i in SIM_SCORES[1: TOP_N + 1]]
         # Return the top-n most similar movies
-        return self.movies["title"].iloc[movie_indices]
+        return self.movies["title"].iloc[MOVIE_INDICIES]
 
     def collaborative_filtering(self):
         """
@@ -45,17 +45,17 @@ class RecommenderSystem:
         using the SVD algorithm from Surprise.
         """
         # Prepare data for Surprise library
-        reader = Reader(rating_scale=(1, 5))
-        data = Dataset.load_from_df(
-            self.ratings[["userId", "movieId", "rating"]], reader
+        READER = Reader(rating_scale=(1, 5))
+        DATA = Dataset.load_from_df(
+            self.ratings[["userId", "movieId", "rating"]], READER
         )
         # Split data into training and testing sets
-        trainset, testset = train_test_split(data, test_size=0.25)
+        TRAINSET, TESTSET = train_test_split(DATA, TEST_SIZE=0.25)
         # Use the SVD algorithm for collaborative filtering
         svd = SVD()
-        svd.fit(trainset)
+        svd.fit(TRAINSET)
         # Test the model
-        predictions = svd.test(testset)
+        predictions = svd.test(TESTSET)
         return svd, predictions
 
     def recommend_movies(self, user_id, svd_model, top_n=10):
@@ -64,28 +64,28 @@ class RecommenderSystem:
         using collaborative filtering model (SVD).
         """
         # Get all movies
-        all_movie_ids = self.ratings["movieId"].unique()
+        ALL_MOVIES_ID = self.ratings["movieId"].unique()
         # Predict ratings for all movies the user hasn't rated yet
-        movies_not_rated = self.ratings[
+        MOVIES_NOT_RATED = self.ratings[
             ~self.ratings["movieId"].isin(
                 self.ratings[self.ratings["userId"] == user_id]["movieId"]
             )
         ]
         # Get predictions for unrated movies
-        predictions = [
-            (movie_id, svd_model.predict(user_id, movie_id).est)
-            for movie_id in movies_not_rated["movieId"]
+        PREDICTIONS = [
+            (MOVIE_ID, svd_model.predict(user_id, MOVIE_ID).est)
+            for MOVIE_ID in MOVIES_NOT_RATED["movieId"]
         ]
-        # Get predictions for unrated movies
-        predictions = [
+        # Get predictions for all movies
+        PREDICTIONS = [
             (movie_id, svd_model.predict(user_id, movie_id).est)
-            for movie_id in all_movie_ids
+            for movie_id in ALL_MOVIES_ID
         ]
         # Sort predictions by predicted rating
-        predictions = sorted(predictions, key=lambda x: x[1], reverse=True)
+        PREDICTIONS = sorted(PREDICTIONS, key=lambda x: x[1], reverse=True)
         # Return the top-n recommended movies
-        recommended_movie_ids = [pred[0] for pred in predictions[:top_n]]
+        RECOMMENDED_MOVIES_ID = [pred[0] for pred in PREDICTIONS[:top_n]]
         # Return movie titles
-        return self.movies[self.movies["movieId"].isin(recommended_movie_ids)][
+        return self.movies[self.movies["movieId"].isin(RECOMMENDED_MOVIES_ID)][
             "title"
         ]

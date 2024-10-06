@@ -26,13 +26,13 @@ class MovieLensDataLoader:
         links (pd.DataFrame): Links dataset
         """
         try:
-            movies = pd.read_csv(f"{self.path}movies.csv")
-            ratings = pd.read_csv(f"{self.path}ratings.csv")
-            tags = pd.read_csv(f"{self.path}tags.csv")
-            links = pd.read_csv(f"{self.path}links.csv")
+            MOVIES = pd.read_csv(f"{self.path}movies.csv")
+            RATINGS = pd.read_csv(f"{self.path}ratings.csv")
+            TAGS = pd.read_csv(f"{self.path}tags.csv")
+            LINKS = pd.read_csv(f"{self.path}links.csv")
 
             print("Files loaded successfully!")
-            return movies, ratings, tags, links
+            return MOVIES, RATINGS, TAGS, LINKS
         except FileNotFoundError as e:
             print(f"Error: {e}")
             return None, None, None, None
