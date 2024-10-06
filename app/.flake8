@@ -1,11 +1,12 @@
 [flake8]
-exclude = 
+extend-ignore = E501
+exclude =
     migrations,
     __pycache__,
     manage.py,
     settings.py,
-    venv,
     .vscode,
     .git,
+    vevn,
     .venv,
     .env,
