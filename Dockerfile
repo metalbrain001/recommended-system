@@ -9,7 +9,12 @@ COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 # Set the working directory in the container
 COPY ./app /app
 WORKDIR /app
-# Expose the Flask port
+
+# Copy the wait-for-postgres.sh script and make sure it's executable
+COPY wait-for-postgres.sh ./wait-for-postgres.sh
+RUN chmod +x /app/wait-for-postgres.sh
+
+# Expose the port the app runs on
 EXPOSE 5000
 ARG DEV=false
 # Install Python dependencies
