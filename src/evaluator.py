@@ -12,7 +12,8 @@ class Evaluator:
 
     def evaluate_rmse(self, predictions):
         """
-        Evaluate RMSE (Root Mean Squared Error) for collaborative filtering model.
+        Evaluate RMSE (Root Mean Squared Error)
+        for collaborative filtering model.
         """
         return accuracy.rmse(predictions)
 

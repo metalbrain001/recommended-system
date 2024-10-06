@@ -1,4 +1,7 @@
-""" This module contains the MovieLensDataLoader class that loads the MovieLens dataset files. """
+"""
+This module contains the MovieLensDataLoader
+class that loads the MovieLens dataset files.
+"""
 
 import pandas as pd
 
@@ -13,7 +16,9 @@ class MovieLensDataLoader:
         self.path = path
 
     def load_data(self):
-        """Loads MovieLens dataset files (movies, ratings, tags, links) from the given path
+        """Loads MovieLens dataset files
+        (movies, ratings, tags, links)
+        from the given path
         Returns:
         movies (pd.DataFrame): Movies dataset
         ratings (pd.DataFrame): Ratings dataset

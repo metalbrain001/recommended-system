@@ -7,7 +7,8 @@ from surprise.model_selection import train_test_split
 
 
 class RecommenderSystem:
-    """Class for content and collaborative filtering recommendation."""
+    """Class for content and collaborative
+    filtering recommendation."""
 
     def __init__(self, movies, ratings):
         """
@@ -18,7 +19,8 @@ class RecommenderSystem:
 
     def content_based_filtering(self, movie_title, top_n=10):
         """
-        Content-based filtering recommendation based on movie genres.
+        Content-based filtering
+        recommendation based on movie genres.
         Recommends movies similar to the given movie title.
         """
         # Use TF-IDF Vectorizer to calculate the similarity between genres
@@ -39,7 +41,8 @@ class RecommenderSystem:
 
     def collaborative_filtering(self):
         """
-        Train a collaborative filtering model using the SVD algorithm from Surprise.
+        Train a collaborative filtering model
+        using the SVD algorithm from Surprise.
         """
         # Prepare data for Surprise library
         reader = Reader(rating_scale=(1, 5))
@@ -57,7 +60,8 @@ class RecommenderSystem:
 
     def recommend_movies(self, user_id, svd_model, top_n=10):
         """
-        Recommend top-n movies for a given user using collaborative filtering model (SVD).
+        Recommend top-n movies for a given user
+        using collaborative filtering model (SVD).
         """
         # Get all movies
         all_movie_ids = self.ratings["movieId"].unique()
