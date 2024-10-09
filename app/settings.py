@@ -102,18 +102,6 @@ DATABASES = {
     }
 }
 
-# Override for GitHub Actions
-if os.environ.get("GITHUB_WORKFLOW"):
-    DATABASES["default"].update(
-        {
-            "NAME": "github_actions",
-            "USER": "postgres",
-            "PASSWORD": "postgres",
-            "HOST": "db",
-            "PORT": "5432",
-        }
-    )
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
