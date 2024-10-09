@@ -109,3 +109,15 @@ Time availability
 Movie likes/dislikes
 Trending or classic preference
 Keywords or themes (e.g., "action", "romance")
+
+Features:
+
+- Movie Rating System
+- Movie Watchlist
+- Favorite Genre(s) Selection
+- Movie Tags or Keywords
+  Feature: Allow users to tag movies with keywords or select pre-defined tags (e.g., "funny," "exciting," "dark").
+- Movie Recommendations Based on Mood
+- Surveys for Initial Preferences
+- User Reviews and Comments
+- Recommendation Feedback

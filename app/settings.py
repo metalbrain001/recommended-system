@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -20,14 +21,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    "django-insecure-hw#&5cns$&ujn&#fwpmni0=m4s#c7090w7+usz(v#_5wozj8=c"
-)
+SECRET_KEY = "django-insecure-hw#&5cns$&ujn&#fwpmni0=m4s#c7090w7+usz(v#_5wozj8=c"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = [
+    "localhost",
+]
 
 
 # Application definition
@@ -40,6 +42,23 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "core",
+    "rest_framework",
+    "rest_framework.authtoken",
+    "drf_spectacular",
+    "tailwind",
+    "theme",
+    "django_browser_reload",
+    "user",
+    "movies",
+    "rating",
+]
+
+NPM_BIN_PATH = "/usr/local/bin/npm"
+
+TAILWIND_APP_NAME = "theme"
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 MIDDLEWARE = [
@@ -50,6 +69,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "app.urls"
@@ -78,11 +98,11 @@ WSGI_APPLICATION = "app.wsgi.application"
 
 DATABASES = {
     "default": {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ.get('POSTGRES_HOST'),
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": os.environ.get("POSTGRES_HOST"),
+        "NAME": os.environ.get("POSTGRES_NAME"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
     }
 }
 
@@ -99,20 +119,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         "NAME": (
-            "django.contrib.auth.password_validation."
-            "MinimumLengthValidator"
+            "django.contrib.auth.password_validation." "MinimumLengthValidator"
         ),
     },
     {
         "NAME": (
-            "django.contrib.auth.password_validation."
-            "CommonPasswordValidator"
+            "django.contrib.auth.password_validation." "CommonPasswordValidator"
         ),
     },
     {
         "NAME": (
-            "django.contrib.auth.password_validation."
-            "NumericPasswordValidator"
+            "django.contrib.auth.password_validation." "NumericPasswordValidator"
         ),
     },
 ]
@@ -135,7 +152,18 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+# Tailwind Static Files
+STATICFILES_DIRS = [
+    BASE_DIR / "theme/static_src",
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "core.User"
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}

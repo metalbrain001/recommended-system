@@ -2,7 +2,24 @@
 FROM python:3.10-alpine3.14
 LABEL maintainer="metalbrain.net"
 
-# Set environment variables
+# Install Node.js and npm
+RUN apt-get update && \
+  apt-get install -y nodejs npm && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+# Install Tailwind CSS using npm
+RUN npm install tailwindcss --save-dev && \
+  npm install postcss-cli --save-dev && \
+  npm install autoprefixer --save-dev && \
+  npx tailwindcss init -p && \
+  npx tailwindcss build ./src/styles.css -o ./dist/styles.css
+
+# Install Tailwind's other dev dependencies like autoprefixer, postcss (optional)
+RUN npx tailwindcss init -p && \
+  npm install postcss autoprefixer --save-dev && \
+  npx tailwindcss build ./src/styles.css -o ./dist/styles.css
+
 ENV PYTHONDONTWRITEBYTECODE=1
 
 COPY ./dev-requirements.txt /tmp/requirements.txt
