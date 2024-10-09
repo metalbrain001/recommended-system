@@ -102,6 +102,17 @@ DATABASES = {
     }
 }
 
+if os.environ.get("GITHUB_WORKFLOW"):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "github_actions",
+            "USER": "POSTGRES_USER",
+            "PASSWORD": "POSTGRES_PASSWORD",
+            "HOST": "POSTGRES_HOST",
+            "PORT": "5433",
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
