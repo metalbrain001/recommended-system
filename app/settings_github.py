@@ -1,4 +1,4 @@
-from .settings import *  # Import the base settings
+import os
 
 # Override the database settings for GitHub Actions
 DATABASES = {
