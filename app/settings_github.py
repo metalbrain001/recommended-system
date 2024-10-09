@@ -1,5 +1,3 @@
-import os
-
 # Override the database settings for GitHub Actions
 DATABASES = {
     "default": {
