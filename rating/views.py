@@ -38,12 +38,10 @@ class RatingViewSet(
     ordering_fields = ["created_at", "rating"]
 
     def get_queryset(self):
-        """Return objects for the current authenticated user only."""
+        """
+        Return objects for the current authenticated user only.
+        """
         return self.queryset.filter(user=self.request.user).order_by("-rating")
-
-    def perform_create(self, serializer):
-        """Create a new rating."""
-        serializer.save(user=self.request.user)
 
     def perform_create(self, serializer):
         """Create a new rating."""

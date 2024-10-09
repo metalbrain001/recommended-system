@@ -2,7 +2,6 @@
 This module contains tests for the movies API.
 """
 
-from decimal import Decimal
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse

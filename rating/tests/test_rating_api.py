@@ -2,7 +2,6 @@
 This module contains tests for the rating API.
 """
 
-from decimal import Decimal
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
@@ -64,7 +63,10 @@ class privateRatingAPI(TestCase):
         self.assertEqual(res.data["results"], serializer.data)
 
     def test_limited_to_user(self):
-        """Test list of ratings in this method is limited to only the authenticated user."""
+        """
+        Test list of ratings in this method is
+        limited to only the authenticated user.
+        """
         user2 = get_user_model().objects.create_user(
             "other@example.com",
             "testpass123",

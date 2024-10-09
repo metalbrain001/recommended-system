@@ -42,10 +42,6 @@ class MovieViewSet(
 
     def perform_create(self, serializer):
         """Create a new movie."""
-        serializer.save(user=self.request.user)
-
-    def perform_create(self, serializer):
-        """Create a new movie."""
         if Movie.objects.filter(
             title=serializer.validated_data["title"]
         ).exists():
