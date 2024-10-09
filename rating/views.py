@@ -39,12 +39,15 @@ class RatingViewSet(
 
     def get_queryset(self):
         """
-        Return objects for the current authenticated user only.
+        Return objects for the current
+        authenticated user only.
         """
         return self.queryset.filter(user=self.request.user).order_by("-rating")
 
     def perform_create(self, serializer):
-        """Create a new rating."""
+        """
+        Create a new rating.
+        """
         if Rating.objects.filter(
             movie=serializer.validated_data["movies"]
         ).exists():

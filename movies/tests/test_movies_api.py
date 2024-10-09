@@ -30,19 +30,26 @@ def create_movie(user, **params):
 
 
 class publicMovieApiTests(TestCase):
-    """Test the publicly available movies API."""
+    """
+    Test the publicly available movies API.
+    """
 
     def setUp(self):
         self.client = APIClient()
 
     def test_auth_required(self):
-        """Test that authentication is required for retrieving movies."""
+        """
+        Test that authentication is
+        required for retrieving movies.
+        """
         res = self.client.get(MOVIES_URL)
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
 class privateMovieApiTests(TestCase):
-    """Test the private movies API."""
+    """
+    Test the private movies API.
+    """
 
     def setUp(self):
         self.client = APIClient()
@@ -53,7 +60,9 @@ class privateMovieApiTests(TestCase):
         self.client.force_authenticate(self.user)
 
     def test_retrieve_movies(self):
-        """Test retrieving movies."""
+        """
+        Test retrieving movies.
+        """
         create_movie(user=self.user)
         create_movie(user=self.user)
         res = self.client.get(MOVIES_URL)
@@ -63,7 +72,10 @@ class privateMovieApiTests(TestCase):
         self.assertEqual(res.data["results"], serializer.data)
 
     def test_limited_to_user(self):
-        """Test list of movies returned are for the authenticated user."""
+        """
+        Test list of movies returned are for
+        the authenticated user.
+        """
         user2 = get_user_model().objects.create_user(
             "other@example.com",
             "testpass123",
