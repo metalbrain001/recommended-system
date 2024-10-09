@@ -107,10 +107,10 @@ if os.environ.get("GITHUB_WORKFLOW"):
         "default": {
             "ENGINE": "django.db.backends.postgresql",
             "NAME": "github_actions",
-            "USER": "POSTGRES_USER",
-            "PASSWORD": "POSTGRES_PASSWORD",
-            "HOST": "POSTGRES_HOST",
-            "PORT": "5433",
+            "USER": "postgres",
+            "PASSWORD": "postgres",
+            "HOST": "db",
+            "PORT": "5432",
         }
     }
 
