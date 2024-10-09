@@ -14,6 +14,9 @@ psql -U metalbrain -h db -d devdb
 
 - Quit : \q
 
+- Get current User and current database: SELECT current_database(), current_user;
+
+
 Using Quieries:
 - SELECT datname FROM pg_database;
 

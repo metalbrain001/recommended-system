@@ -3,7 +3,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "github_actions",
-        "USER": "postgres",
+        "USER": "metalbrain",
         "PASSWORD": "postgres",
         "HOST": "db",
         "PORT": "5432",

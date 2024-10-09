@@ -27,6 +27,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Test
         run: docker compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
+      - name: Lint
+        run: docker compose run --rm app sh -c "flake8"
         env:
           POSTGRES_HOST: db
           POSTGRES_DB: postgres
@@ -34,7 +36,3 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_PORT: 5433
-      - name: Lint
-        run: docker compose run --rm app sh -c "flake8"
-      - name: Debug Environment Variables
-        run: printenv
