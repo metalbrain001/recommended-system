@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     "user",
     "movies",
     "rating",
+    "tag",
+    "link",
 ]
 
 NPM_BIN_PATH = "/usr/local/bin/npm"

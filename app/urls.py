@@ -35,6 +35,8 @@ urlpatterns = [
     path("api/user/", include("user.urls")),
     path("api/movies/", include("movies.urls")),
     path("api/rating/", include("rating.urls")),
+    path("api/tag/", include("tag.urls")),
+    path("api/link/", include("link.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
     path("", views.home, name="home.html"),  # Add this line for the root URL
 ]

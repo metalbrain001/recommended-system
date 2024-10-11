@@ -15,7 +15,10 @@ RATING_URL = reverse("rating:rating-list")
 
 
 def create_rating(user, movies, rating=5):
-    """Create and return a new rating."""
+    """
+    Create and return a new rating.
+    """
+
     defaults = {
         "rating": rating,
     }
@@ -24,19 +27,26 @@ def create_rating(user, movies, rating=5):
 
 
 class publicRatingAPI(TestCase):
-    """Test the public rating API."""
+    """
+    Test the public rating API.
+    """
 
     def setUp(self):
         self.client = APIClient()
 
     def test_auth_required(self):
-        """Test that authentication is required."""
+        """
+        Test that authentication is required.
+        """
+
         res = self.client.get(RATING_URL)
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
 class privateRatingAPI(TestCase):
-    """Test the private rating API."""
+    """
+    Test the private rating API.
+    """
 
     def setUp(self):
         self.client = APIClient()
@@ -47,7 +57,10 @@ class privateRatingAPI(TestCase):
         self.client.force_authenticate(self.user)
 
     def test_retrieve_ratings(self):
-        """Test retrieving ratings."""
+        """
+        Test retrieving ratings.
+        """
+
         movies = Movie.objects.create(
             user=self.user,
             title="Sample Movie",

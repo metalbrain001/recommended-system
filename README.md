@@ -121,3 +121,30 @@ Features:
 - Surveys for Initial Preferences
 - User Reviews and Comments
 - Recommendation Feedback
+
+How Tags Work in the System:
+Tagging Functionality: Tags are typically used to categorize or label content. In this context, users can tag movies based on personal preferences, opinions, or attributes of the movie. These tags serve as an additional data layer to enhance personalization.
+
+Feature Extraction for Machine Learning:
+
+Tags can be treated as features for matrix factorization or collaborative filtering systems. For example, if many users tag a movie as “music” or “comedy,” this information can enhance the recommendation process by clustering movies with similar tags.
+Collaborative Filtering: Users with similar tagging behavior might receive similar recommendations.
+Matrix Factorization: Tags can be used as an additional feature to decompose user-movie interactions, which improves the latent feature space in the model.
+K-Means: Tags help in clustering movies or users based on common tags. Movies with similar tags will cluster together, helping recommend similar content to users.
+User Interaction:
+
+Tagging Movies: Users can assign tags to movies they've watched.
+Browsing by Tags: Users may receive recommendations based on tags they've frequently interacted with or assigned to movies.
+Tag Influence on Recommendations: Tags help refine the recommendation system by improving the content-based filtering aspect of the system.
+
+Use Links to Group Related Movies
+When creating collaborative filtering models, the links (e.g., sequels, prequels, or other related relationships) between movies can provide a basis for item similarity beyond user interactions. These relationships can be used in the following ways:
+
+Enhancing Similarity Scores: When calculating the similarity between two movies (for example, using cosine similarity), you can adjust the similarity score between linked movies to be higher. For example, if two movies are linked as sequels, increase their similarity score.
+
+Implicit User Preferences: If a user interacts with one movie in a linked set, you can use that information to recommend related movies from the same set. For example, if a user watches Movie 1 (with movieId 1), you might prioritize recommending its sequel (with movieId 2).
+
+Metadata for Collaborative Filtering: When building your feature matrix for collaborative filtering, include information about the links as an additional feature. This will allow the model to understand connections between movies that users haven't interacted with yet.
+
+Incorporate Linked Movies in Your Test
+You can add a test to ensure that your Link model works as expected. For example, if two movies are linked, the system should be able to retrieve the linked movie. Here is an example of how you might enhance your test_create_links function:
