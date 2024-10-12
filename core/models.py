@@ -172,7 +172,10 @@ class Link(models.Model):
         ordering = ["-timestamp"]
 
     def __str__(self):
-        return f"{self.user} linked {self.movie} ({self.link_type}) with {self.linked_movie}"
+        return (
+            f"{self.user} linked {self.movie} "
+            f"({self.link_type}) with {self.linked_movie}"
+        )
 
     @classmethod
     def get_linked_movies(self):
