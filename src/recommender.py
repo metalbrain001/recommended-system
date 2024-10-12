@@ -7,8 +7,10 @@ from surprise.model_selection import train_test_split
 
 
 class RecommenderSystem:
-    """Class for content and collaborative
-    filtering recommendation."""
+    """
+    Class for content and collaborative
+    filtering recommendation.
+    """
 
     def __init__(self, MOVIES, RATINGS):
         """
@@ -34,8 +36,9 @@ class RecommenderSystem:
         SIM_SCORES = list(enumerate(COSINE_SIM[IDX]))
         # Sort movies by similarity scores
         SIM_SCORES = sorted(SIM_SCORES, key=lambda x: x[1], reverse=True)
-        # Get the indices of the top-n most similar movies
+        # fmt: off
         MOVIE_INDICIES = [i[0] for i in SIM_SCORES[1: TOP_N + 1]]
+        # fmt: on
         # Return the top-n most similar movies
         return self.movies["title"].iloc[MOVIE_INDICIES]
 
@@ -44,6 +47,7 @@ class RecommenderSystem:
         Train a collaborative filtering model
         using the SVD algorithm from Surprise.
         """
+
         # Prepare data for Surprise library
         READER = Reader(rating_scale=(1, 5))
         DATA = Dataset.load_from_df(
@@ -63,6 +67,7 @@ class RecommenderSystem:
         Recommend top-n movies for a given user
         using collaborative filtering model (SVD).
         """
+
         # Get all movies
         ALL_MOVIES_ID = self.ratings["movieId"].unique()
         # Predict ratings for all movies the user hasn't rated yet

@@ -1,6 +1,6 @@
 {
-  "python.analysis.extraPaths": [
-    "./src"
-  ],
+  "python.analysis.extraPaths": ["./src", "./tests"],
+
   "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true
 }

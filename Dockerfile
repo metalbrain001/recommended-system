@@ -2,6 +2,7 @@
 FROM python:3.10-alpine3.14
 LABEL maintainer="metalbrain.net"
 
+# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 
 COPY ./dev-requirements.txt /tmp/requirements.txt
