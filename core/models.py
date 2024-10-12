@@ -60,7 +60,9 @@ class Movie(models.Model):
     Movies for the user
     """
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+    )
     movieId = models.IntegerField(unique=True)
     imdbId = models.CharField(max_length=255, null=True, blank=True)
     tmdbId = models.DecimalField(
@@ -83,7 +85,9 @@ class Rating(models.Model):
     Ratings for the user
     """
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+    )
     movies = models.ForeignKey(Movie, on_delete=models.CASCADE)
     rating = models.DecimalField(
         max_digits=2,
@@ -110,7 +114,9 @@ class Tag(models.Model):
     Tags for filtering movies.
     """
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+    )
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     tag = models.CharField(max_length=255)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -149,7 +155,9 @@ class Link(models.Model):
         (RELATED, "Related"),
     ]
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE
+    )
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     linked_movie = models.ForeignKey(
         Movie, on_delete=models.CASCADE, related_name="linked_movie"
@@ -164,7 +172,7 @@ class Link(models.Model):
         ordering = ["-timestamp"]
 
     def __str__(self):
-        return f"{self.user} linked {self.movie}({self.link_type}) with {self.linked_movie}"
+        return f"{self.user} linked {self.movie} ({self.link_type}) with {self.linked_movie}"
 
     @classmethod
     def get_linked_movies(self):
