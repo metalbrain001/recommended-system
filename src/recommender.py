@@ -37,9 +37,7 @@ class RecommenderSystem:
         # Sort movies by similarity scores
         SIM_SCORES = sorted(SIM_SCORES, key=lambda x: x[1], reverse=True)
         # Get the indices of the top-n most similar movies
-        MOVIE_INDICIES = [
-            i[0] for i in SIM_SCORES[1 : TOP_N + 1]
-        ]  # pylint: disable=E203
+        MOVIE_INDICIES = [i[0] for i in SIM_SCORES[1 : TOP_N + 1]]
         # Return the top-n most similar movies
         return self.movies["title"].iloc[MOVIE_INDICIES]
 
