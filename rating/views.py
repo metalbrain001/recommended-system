@@ -51,5 +51,7 @@ class RatingViewSet(
         if Rating.objects.filter(
             movie=serializer.validated_data["movies"]
         ).exists():
-            raise serializer.ValidationError("You have already rated this movie.")
+            raise serializer.ValidationError(
+                "You have already rated this movie."
+            )
         serializer.save(user=self.request.user)

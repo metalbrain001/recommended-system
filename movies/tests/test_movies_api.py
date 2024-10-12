@@ -19,7 +19,9 @@ def create_movie(user, **params):
     Create and return a sample movie.
     """
     # Get the maximum movieId currently in the database and add 1
-    max_movie_id = Movie.objects.aggregate(max_id=models.Max("movieId"))["max_id"]
+    max_movie_id = Movie.objects.aggregate(max_id=models.Max("movieId"))[
+        "max_id"
+    ]
     new_movie_id = (max_movie_id or 0) + 1  # Default to 1 if no movies exist
     defaults = {
         "title": "Sample Movie",

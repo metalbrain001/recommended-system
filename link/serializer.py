@@ -13,7 +13,14 @@ class LinkSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Link
-        fields = ("id", "link_type", "timestamp", "movie", "linked_movie", "user")
+        fields = (
+            "id",
+            "link_type",
+            "timestamp",
+            "movie",
+            "linked_movie",
+            "user",
+        )
         read_only_fields = (
             "id",
             "timestamp",

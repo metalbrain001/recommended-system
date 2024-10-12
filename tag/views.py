@@ -34,7 +34,12 @@ class TagViewSet(
         authenticated user only
         """
 
-        return super().get_queryset().filter(user=self.request.user).order_by("-tag")
+        return (
+            super()
+            .get_queryset()
+            .filter(user=self.request.user)
+            .order_by("-tag")
+        )
 
     def perform_create(self, serializer):
         """
@@ -43,5 +48,7 @@ class TagViewSet(
         if Tag.objects.filter(
             user=self.request.user, tag=serializer.validated_data["tag"]
         ).exists():
-            raise serializer.ValidationError("You have already created this tag.")
+            raise serializer.ValidationError(
+                "You have already created this tag."
+            )
         serializer.save(user=self.request.user)
