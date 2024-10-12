@@ -7,7 +7,7 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from core.models import Movie, Link
+from core.models import Link
 from link.serializer import LinkSerializer
 
 
@@ -85,12 +85,6 @@ class PrivateLinkApiTests(TestCase):
             "testpass123",
         )
 
-        link = Link.objects.create(
-            user=self.user,
-            movie="Movie7",
-            linked_movie="Movie8",
-            link_type="Similar",
-        )
         Link.objects.create(
             user=user2,
             movie="Movie9",
