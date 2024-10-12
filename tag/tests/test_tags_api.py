@@ -7,7 +7,7 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from core.models import Movie, Tag
+from core.models import Tag
 from tag.serializer import TagSerializer
 
 TAGS_URL = reverse("movies:tag-list")

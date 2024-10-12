@@ -34,9 +34,7 @@ class TagViewSet(
         authenticated user only
         """
 
-        return (
-            super().get_queryset().filter(user=self.request.user).order_by("-tag")
-        )
+        return super().get_queryset().filter(user=self.request.user).order_by("-tag")
 
     def perform_create(self, serializer):
         """

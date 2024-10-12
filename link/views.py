@@ -3,11 +3,15 @@ Link Views
 """
 
 from rest_framework import viewsets, mixins
-from rest_framework.authentication import TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from core.models import Link
 from link import serializer
+
+
+class LinkPagination(PageNumberPagination):
+    page_size = 10
 
 
 class LinkViewSet(
@@ -26,6 +30,7 @@ class LinkViewSet(
     permission_classes = (IsAuthenticated,)
     queryset = Link.objects.all()
     serializer_class = serializer.LinkSerializer
+    pagination_class = LinkPagination
 
     def get_queryset(self):
         """

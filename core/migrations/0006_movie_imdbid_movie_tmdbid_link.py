@@ -8,33 +8,74 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0005_alter_user_groups_tag'),
+        ("core", "0005_alter_user_groups_tag"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='movie',
-            name='imdbId',
+            model_name="movie",
+            name="imdbId",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AddField(
-            model_name='movie',
-            name='tmdbId',
-            field=models.DecimalField(blank=True, decimal_places=1, max_digits=10, null=True),
+            model_name="movie",
+            name="tmdbId",
+            field=models.DecimalField(
+                blank=True, decimal_places=1, max_digits=10, null=True
+            ),
         ),
         migrations.CreateModel(
-            name='Link',
+            name="Link",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('link_type', models.CharField(choices=[('Sequel', 'Sequel'), ('Prequel', 'Prequel'), ('Remake', 'Remake'), ('Related', 'Related')], default='Related', max_length=20)),
-                ('timestamp', models.DateTimeField(auto_now_add=True)),
-                ('linked_movie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='linked_movie', to='core.movie')),
-                ('movie', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.movie')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "link_type",
+                    models.CharField(
+                        choices=[
+                            ("Sequel", "Sequel"),
+                            ("Prequel", "Prequel"),
+                            ("Remake", "Remake"),
+                            ("Related", "Related"),
+                        ],
+                        default="Related",
+                        max_length=20,
+                    ),
+                ),
+                ("timestamp", models.DateTimeField(auto_now_add=True)),
+                (
+                    "linked_movie",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="linked_movie",
+                        to="core.movie",
+                    ),
+                ),
+                (
+                    "movie",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="core.movie",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'ordering': ['-timestamp'],
-                'unique_together': {('user', 'movie', 'linked_movie')},
+                "ordering": ["-timestamp"],
+                "unique_together": {("user", "movie", "linked_movie")},
             },
         ),
     ]
