@@ -1,11 +1,7 @@
 {
   "python.analysis.extraPaths": ["./src", "./tests"],
-  "python.linting.pylintEnabled": true,
 
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "always"
-  }
+  "editor.formatOnSave": true
 }
