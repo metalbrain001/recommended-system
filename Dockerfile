@@ -17,7 +17,7 @@ RUN chmod +x /app/wait-for-postgres.sh
 
 # Expose the port the app runs on
 EXPOSE 5000
-ARG DEV=false
+ARG DEV=true
 # Install Python dependencies
 RUN python -m venv /py && \
   /py/bin/pip install --upgrade pip && \
