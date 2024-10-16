@@ -1,6 +1,5 @@
 import pandas as pd
 from core.models import Movie, Rating, Tag, Link
-from django.utils.dateparse import parse_datetime
 from django.contrib.auth import get_user_model
 from django.db import transaction
 
